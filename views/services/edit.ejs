@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit <%= services.name %></title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body style="height: 100vh;">
+    <%- include('../partials/navbar.ejs') %>
+  <div class="container" style="margin-top: -80px;">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 style="display: flex; justify-content: center; margin-top: 40px;">Edit Service</h1>
+    <div class="row">
+      <div class="col-md-5 mx-auto">
+        <div id="first">
+         <form action="/services/<%= services._id %>?_method=PUT" method="POST">
+            <div class="form-group">
+              <label for="nameOfService">Name</label>
+              <input type="text" name="nameOfService" class="form-control" id="nameOfService" 
+                placeholder="Enter Your New Service Name" value="<%= services.nameOfService %>">
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="text" name="price" class="form-control" id="price"
+                placeholder="Enter The Instruction" value="<%= services.price %>">
+            </div>
+            <div class="col-md-14 text-center">
+              <button type="submit" style="font-size: 25px;" class=" btn btn-block mybtn btn-primary tx-tfm">Update</button>
+            </div>
+            <br>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</body>
+</html>

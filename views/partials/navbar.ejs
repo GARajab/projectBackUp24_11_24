@@ -1,0 +1,25 @@
+<nav>
+  <div class="navbar">
+    <h1 id="nav-header" style="color: #17a2bf">Phone Unlock</h1>
+    <div class="nav-links">
+      <% if (user && user.username == "Admin") { %>
+      <!-- Check if the user is authenticated -->
+      <a href="/auth/sign-out" class="btn btn-danger">Sign Out</a>
+      <a href="/services/dashBoard" class="btn btn-danger">Home</a>
+
+      <% } else if (user) { %>
+      <a href="/auth/sign-out" class="btn btn-primary">Sign Out</a>
+      <a href="/services/dashBoard" class="btn btn-primary">Home</a>
+      <a
+        href="/services/allServices?userId=<%= user._id %>"
+        class="btn btn-primary"
+        >My Services</a
+      >
+      <% } else { %>
+      <a href="/auth/sign-in" class="btn btn-primary">Sign In</a>
+      <a href="/auth/sign-up" class="btn btn-primary">Sign Up</a>
+
+      <% } %>
+    </div>
+  </div>
+</nav>
