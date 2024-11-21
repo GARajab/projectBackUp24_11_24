@@ -1,22 +1,33 @@
 const express = require("express")
 const router = express.Router()
 const servicesController = require("../controllers/services")
+const isSignedIn = require("../middleware/is-sign-in")
+const isAdmin = require("../middleware/is-Admin")
 
-// Define the route for usersList to display a list of users
-router.get("/usersList", servicesController.showUsersList)
+router.get("/usersList", isSignedIn, isAdmin, servicesController.showUsersList)
+router.get("/otherUsers", isSignedIn, servicesController.allUsersServices)
+router.get("/dashBoard", isSignedIn, servicesController.showServices)
+router.get("/", isSignedIn, servicesController.index)
+router.get("/new", isSignedIn, servicesController.newService)
+router.get("/:serviceId", isSignedIn, servicesController.getById)
+router.post("/", isSignedIn, servicesController.createService)
+router.get(
+  "/:serviceId/edit",
+  isSignedIn,
 
-// Define the route for viewing other users' service
-router.get("/otherUsers", servicesController.allUsersServices)
+  servicesController.editServices
+)
+router.put(
+  "/:serviceId",
+  isSignedIn,
 
-// Other routes follow
-router.get("/dashBoard", servicesController.showServices)
-router.get("/", servicesController.index)
-router.get("/new", servicesController.newService)
-router.get("/:serviceId", servicesController.getById)
-router.post("/", servicesController.createService)
-router.get("/:serviceId/edit", servicesController.editServices)
-router.put("/:serviceId", servicesController.updateServices)
-router.delete("/:serviceId", servicesController.deleteServices)
-router.get("/list", servicesController.selectedService)
+  servicesController.updateServices
+)
+router.delete(
+  "/:serviceId",
+  isSignedIn,
 
+  servicesController.deleteServices
+)
+router.get("/carriers", isSignedIn, servicesController.getCarrierList)
 module.exports = router

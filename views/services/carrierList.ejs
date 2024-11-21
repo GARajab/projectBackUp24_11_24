@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrier List</title>
-  </head>
-  <body>
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Open this select menu</option>
-      <% services.forEach((service, index) => { %>
-      <option><%= service.nameOfService %></option>
-      <% }) %>
-    </select>
-  </body>
+</head>
+<body>
+    <h1>Carrier List</h1>
+    <ul>
+        <% carriers.forEach(carrier => { %>
+            <li>
+                <strong><%= carrier.name %></strong>: <%= carrier.description %>
+            </li>
+        <% }) %>
+    </ul>
+</body>
 </html>

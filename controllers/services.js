@@ -64,7 +64,7 @@ const updateServices = async (req, res) => {
   try {
     const currentService = await Services.findById(req.params.serviceId)
     await currentService.updateOne(req.body)
-    res.redirect(`/services/otherUsers?userId=${req.session.user._id}`)
+    res.redirect("/services")
   } catch (error) {
     console.log(error)
     res.redirect("/")
@@ -103,7 +103,7 @@ const showServices = async (req, res) => {
     const populatedServices = await Services.find({}).populate(
       "userServSelected"
     )
-    res.render("services/dashBoard.ejs", { services: populatedServices }) // Render a views file called show.ejs
+    res.render("services/dashBoard.ejs", { services: populatedServices,loggedIn }) // Render a views file called show.ejs
   } catch (err) {
     console.log(err)
     res.redirect("/")
@@ -138,16 +138,14 @@ const allUsersServices = async (req, res) => {
   }
 }
 
-const selectedService = async (req, res) => {
-  const services = await Services.find()
-  res.render("services/carrierList", { services })
-}
-
-const postServices = async (req, res) => {
-  const selectedServiceId = req.body.serviceId
-  console.log("Selected Service ID:", selectedServiceId)
-  // You can now use this ID to fetch or manipulate data related to the selected service
-  res.send("Service selected: " + selectedServiceId)
+const getCarrierList = async (req, res) => {
+  try {
+    const carriers = await Services.find() // Fetch data from MongoDB
+    res.render("services/carrierList", { carriers }) // Render your view with the data
+  } catch (error) {
+    console.error(error)
+    res.status(500).send("Server Error")
+  }
 }
 
 module.exports = {
@@ -161,6 +159,5 @@ module.exports = {
   createService,
   index,
   newService,
-  selectedService,
-  postServices,
+  getCarrierList,
 }
