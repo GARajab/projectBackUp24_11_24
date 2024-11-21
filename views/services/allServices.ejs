@@ -26,22 +26,35 @@
     <h1 style="text-align: center">Services Table</h1>
     <div class="col-md-14 text-center">
       <br />
-      <a href="/services/new" style="text-decoration: none">
-        <div class="d-md-flex justify-content-md-end">
-          <button class="btn col-2 btn-lg btn-block mybtn btn-success tx-tfm">
-            + Add
-          </button>
-        </div></a
-      >
+      <div class="d-md-flex justify-content-md-end">
+        <a
+          href="/services/new"
+          class="btn col-2 btn-lg btn-success mybtn btn-block tx-tfm"
+        >
+          + Add
+        </a>
+        <% if (!user.username == "Admin") { %>
+        <a
+          href="/orders/new"
+          class="btn col-2 btn-lg btn-primary mybtn btn-block tx-tfm"
+          style="margin-left: 10px"
+        >
+          Add New Order
+        </a>
+        <% } %>
+      </div>
       <br />
     </div>
+
     <table class="table table-bordered table-hover" style="text-align: center">
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Price</th>
+          <% if (user.username == "Admin") { %>
           <th scope="col" class="col-md-2">Action</th>
+          <% } %>
         </tr>
       </thead>
 
@@ -51,25 +64,29 @@
           <th scope="row"><%= index+1 %></th>
           <td><%= service.nameOfService %></td>
           <td><%= service.price %></td>
-          <td>
-            <a
-              href="/services/<%= service._id %>/edit"
-              class="btn btn-primary btn-block tx-tfm btn-sm"
-              >Edit</a
-            >
-            <br />
-            <form
-              action="/services/<%= service._id %>?_method=DELETE"
-              method="POST"
-            >
-              <button
-                type="submit"
-                class="btn btn-danger btn-block tx-tfm btn-sm"
+          <% if (user.username == "Admin") { %>
+          <div class="btn-group text-center">
+            <td>
+              <a
+                href="/services/<%= service._id %>/edit"
+                class="btn btn-primary btn-block tx-tfm btn-sm"
+                >Edit</a
               >
-                Delete
-              </button>
-            </form>
-          </td>
+              <form
+                action="/services/<%= service._id %>?_method=DELETE"
+                method="POST"
+                style="display: inline"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-block btn-danger tx-tfm btn-sm"
+                >
+                  Delete
+                </button>
+              </form>
+              <% } %>
+            </td>
+          </div>
         </tr>
         <% }) %>
       </tbody>

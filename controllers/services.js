@@ -64,7 +64,7 @@ const updateServices = async (req, res) => {
   try {
     const currentService = await Services.findById(req.params.serviceId)
     await currentService.updateOne(req.body)
-    res.redirect("/services")
+    res.redirect(`/services/otherUsers?userId=${req.session.user._id}`)
   } catch (error) {
     console.log(error)
     res.redirect("/")
@@ -73,8 +73,12 @@ const updateServices = async (req, res) => {
 
 const deleteServices = async (req, res) => {
   try {
-    await Services.deleteOne(req.params.serviceId)
-    res.redirect("/services")
+    await Services.findByIdAndDelete(req.params.serviceId)
+    if (req.session.user.username == "Admin") {
+      res.redirect("/services")
+    } else {
+      res.redirect(`/services/otherUsers?userId=${req.session.user._id}`)
+    }
   } catch (error) {
     console.error(error)
     res.redirect("/")
@@ -134,6 +138,18 @@ const allUsersServices = async (req, res) => {
   }
 }
 
+const selectedService = async (req, res) => {
+  const services = await Services.find()
+  res.render("services/carrierList", { services })
+}
+
+const postServices = async (req, res) => {
+  const selectedServiceId = req.body.serviceId
+  console.log("Selected Service ID:", selectedServiceId)
+  // You can now use this ID to fetch or manipulate data related to the selected service
+  res.send("Service selected: " + selectedServiceId)
+}
+
 module.exports = {
   allUsersServices,
   showUsersList,
@@ -145,4 +161,6 @@ module.exports = {
   createService,
   index,
   newService,
+  selectedService,
+  postServices,
 }

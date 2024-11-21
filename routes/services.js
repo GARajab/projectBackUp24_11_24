@@ -17,5 +17,6 @@ router.post("/", servicesController.createService)
 router.get("/:serviceId/edit", servicesController.editServices)
 router.put("/:serviceId", servicesController.updateServices)
 router.delete("/:serviceId", servicesController.deleteServices)
+router.get("/list", servicesController.selectedService)
 
 module.exports = router
