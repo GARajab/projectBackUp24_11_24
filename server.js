@@ -12,7 +12,8 @@ const isSignedIn = require("./middleware/is-sign-in")
 const passUserToView = require("./middleware/pass-user-to-view")
 const authRouter = require("./routes/auth.js")
 const servicesRouter = require("./routes/services.js")
-// const ingredientsController = require("./controllers/ingredients.js");
+// Import routes
+const carriersRoutes = require("./routes/carriers")
 
 const port = process.env.PORT ? process.env.PORT : 3000
 
@@ -37,6 +38,8 @@ app.set("view engine", "ejs") // Set EJS as the default view engine
 
 // require("controller")
 app.use(passUserToView)
+// Use routes
+app.use(carriersRoutes)
 
 // require("routes")
 app.use("/auth", authRouter)

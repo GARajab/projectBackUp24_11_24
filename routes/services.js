@@ -11,23 +11,7 @@ router.get("/", isSignedIn, servicesController.index)
 router.get("/new", isSignedIn, servicesController.newService)
 router.get("/:serviceId", isSignedIn, servicesController.getById)
 router.post("/", isSignedIn, servicesController.createService)
-router.get(
-  "/:serviceId/edit",
-  isSignedIn,
-
-  servicesController.editServices
-)
-router.put(
-  "/:serviceId",
-  isSignedIn,
-
-  servicesController.updateServices
-)
-router.delete(
-  "/:serviceId",
-  isSignedIn,
-
-  servicesController.deleteServices
-)
-router.get("/carriers", isSignedIn, servicesController.getCarrierList)
+router.get("/:serviceId/edit", isSignedIn, servicesController.editServices)
+router.put("/:serviceId", isSignedIn, servicesController.updateServices)
+router.delete("/:serviceId", isSignedIn, servicesController.deleteServices)
 module.exports = router

@@ -103,7 +103,9 @@ const showServices = async (req, res) => {
     const populatedServices = await Services.find({}).populate(
       "userServSelected"
     )
-    res.render("services/dashBoard.ejs", { services: populatedServices,loggedIn }) // Render a views file called show.ejs
+    res.render("services/dashBoard", {
+      services: populatedServices,
+    }) // Render a views file called show.ejs
   } catch (err) {
     console.log(err)
     res.redirect("/")
@@ -138,16 +140,6 @@ const allUsersServices = async (req, res) => {
   }
 }
 
-const getCarrierList = async (req, res) => {
-  try {
-    const carriers = await Services.find() // Fetch data from MongoDB
-    res.render("services/carrierList", { carriers }) // Render your view with the data
-  } catch (error) {
-    console.error(error)
-    res.status(500).send("Server Error")
-  }
-}
-
 module.exports = {
   allUsersServices,
   showUsersList,
@@ -159,5 +151,4 @@ module.exports = {
   createService,
   index,
   newService,
-  getCarrierList,
 }
