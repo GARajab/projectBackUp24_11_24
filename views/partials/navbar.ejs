@@ -10,10 +10,8 @@
 
       <% } else if (user) { %>
       <a href="#" class="btn btn-dark" style="margin-right: 20px">Add Fund</a>
-      <span style="margin-right: 20px; color: #0d61e0; font-weight: bold"
-        >My Balance</span
-      >
-      <a href="#" class="btn btn-success"><%= user.balance %></a>
+     
+      <a href="#" class="btn btn-success">My Balance is: <%= user.balance %></a>
       <a href="/auth/sign-out" class="btn btn-primary">Sign Out</a>
       <a href="/services/dashBoard" class="btn btn-primary">Home</a>
       <a
