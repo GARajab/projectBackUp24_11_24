@@ -61,24 +61,12 @@
     </div>
     
     <script>
-    
- 
     const select = document.getElementById('nameOfService');
     const priceInput = document.getElementById('price');
-    
-
-    // Update the price input field with the selected option's price stored in data attribute
     select.addEventListener("change",()=>{
       const selectedOption = select.options[select.selectedIndex];
       priceInput.value = selectedOption.getAttribute('data-price');
     })
-        
-    
-
-
-
-   
-    
-</script>
+    </script>
   </body>
 </html>
