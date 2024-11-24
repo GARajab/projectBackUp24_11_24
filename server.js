@@ -7,7 +7,7 @@ const session = require("express-session")
 const mongoose = require("mongoose")
 const methodOverRide = require("method-override")
 const morgan = require("morgan")
-
+const addServiceRouter = require("./routes/carriers.js")
 const isSignedIn = require("./middleware/is-sign-in")
 const passUserToView = require("./middleware/pass-user-to-view")
 const authRouter = require("./routes/auth.js")
@@ -45,6 +45,8 @@ app.use(carriersRoutes)
 app.use("/auth", authRouter)
 // const servicesRouter = require("./routes/services.js");
 app.use("/services", servicesRouter)
+
+app.use("/addService", addServiceRouter)
 
 app.use((req, res, next) => {
   if (req.session.messages) {

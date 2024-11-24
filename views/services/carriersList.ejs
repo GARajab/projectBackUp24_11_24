@@ -15,17 +15,17 @@
     <%- include('../partials/navbar.ejs') %>
     <div class="container row justify-content-center mx-auto text-center">
       <h1>Select Your Service</h1>
-      <form action="/addService" method="post" name="purchseService">
+      <form action="/addService" method="POST" name="purchseService">
       <select
         id="nameOfService"
-        name="nameOfService"
+        name="nameOfServiceID"
         class="form-select w-50 text-center mx-auto"
         aria-label="Default select example"
         style="margin-top:30px"
       >
         <option selected>Select The Service</option>
         <% services.forEach((service) => { %>
-        <option value="<%= service.price %>">
+        <option value="<%= service._id %>" data-price="<%= service.price %>">
           <%= service.nameOfService %>
         </option>
         <% }) %>
@@ -42,7 +42,7 @@
           id="price"
           name="price"
           class="form-control w-50 text-center"
-          disabled
+          
         />
 
         <label
@@ -64,21 +64,28 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const nameOfService = document.getElementById("nameOfService")
-      const priceInput = document.getElementById("price")
+    function updatePrice() {
+        const select = document.getElementById('nameOfService');
+        const priceInput = document.getElementById('price');
+        const selectedOption = select.options[select.selectedIndex];
 
-      nameOfService.addEventListener("change", function () {
-        const selectedOption =
-          nameOfService.options[nameOfService.selectedIndex]
-
-        const prices = selectedOption.value
-
-        if (prices) {
-          priceInput.value = prices
+        // Update the price input field with the selected option's price stored in data attribute
+        if (selectedOption.value) {
+            priceInput.value = selectedOption.getAttribute('data-price');
         } else {
-          priceInput.value = ""
+            priceInput.value = "";  // Clear the price if no valid service is selected
         }
-      })
-    </script>
+    }
+
+    // Optional: Validate form before submission
+    function validateForm() {
+        const priceInput = document.getElementById('price');
+        if (priceInput.value === "") {
+            alert("Please select a service to continue.");
+            return false; // Cancel the form submission
+        }
+        return true; // Allow form submission
+    }
+</script>
   </body>
 </html>

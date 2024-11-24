@@ -12,8 +12,15 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     address: { type: String, required: true },
-    IMEI: { type: String, minlength: [15], maxlength: [15] },
-    services: [{ type: mongoose.Schema.Types.ObjectId, ref: "services" }],
+    IMEI: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Services",
+        minlength: [15],
+        maxlength: [15],
+      },
+    ],
+    services: [{ type: mongoose.Schema.Types.ObjectId, ref: "Services" }],
   },
 
   { timestamps: true }
