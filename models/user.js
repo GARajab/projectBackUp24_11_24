@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
         maxlength: [15],
       },
     ],
+    balance: { type: Number, default: 0 },
     services: [{ type: mongoose.Schema.Types.ObjectId, ref: "Services" }],
   },
 

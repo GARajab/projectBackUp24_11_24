@@ -49,6 +49,7 @@ const signin_post = async (req, res) => {
       username: userInDatabase.username,
       _id: userInDatabase._id,
       createdAt: userInDatabase.createdAt,
+      balance: userInDatabase.balance,
     }
     res.render("services/dashBoard", { user: req.session.user })
   } catch (err) {

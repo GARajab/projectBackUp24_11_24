@@ -1,6 +1,6 @@
 <nav>
   <div class="navbar">
-    <h1 id="nav-header" style="color: #17a2bf">Phone Unlock</h1>
+    <h1 id="nav-header" style="color: #0d61e0">Phone Unlock</h1>
     <div class="nav-links">
       <% if (user && user.username == "Admin") { %>
       <!-- Check if the user is authenticated -->
@@ -9,6 +9,11 @@
       <a href="/services" class="btn btn-danger">All Services</a>
 
       <% } else if (user) { %>
+      <a href="#" class="btn btn-dark" style="margin-right: 20px">Add Fund</a>
+      <span style="margin-right: 20px; color: #0d61e0; font-weight: bold"
+        >My Balance</span
+      >
+      <a href="#" class="btn btn-success"><%= user.balance %></a>
       <a href="/auth/sign-out" class="btn btn-primary">Sign Out</a>
       <a href="/services/dashBoard" class="btn btn-primary">Home</a>
       <a
