@@ -28,19 +28,25 @@ exports.showPurchasedServicesList = async (req, res) => {
     if (!service) {
       return res.status(404).send("Service not found.")
     }
-
-    const addnewService = new Services({
-      nameOfService: service.nameOfService,
-      price: req.body.price,
-      IMEI: req.body.IMEI,
-      userServSelected: req.session.user._id,
-    })
-    req.session.user.balance -= req.body.price
-    await User.findByIdAndUpdate(req.session.user._id, {
-      balance: req.session.user.balance,
-    })
-    await Services.create(addnewService)
-    res.redirect(`/services/otherUsers?userId=${req.session.user._id}`)
+    if (
+      req.session.user.balance === 0 ||
+      req.session.user.balance < req.body.price
+    ) {
+      return res.send("Your Balance is Not Enogh To Purchase This Service")
+    } else {
+      const addnewService = new Services({
+        nameOfService: service.nameOfService,
+        price: req.body.price,
+        IMEI: req.body.IMEI,
+        userServSelected: req.session.user._id,
+      })
+      req.session.user.balance -= req.body.price
+      await User.findByIdAndUpdate(req.session.user._id, {
+        balance: req.session.user.balance,
+      })
+      await Services.create(addnewService)
+      res.redirect(`/services/otherUsers?userId=${req.session.user._id}`)
+    }
   } catch (error) {
     console.log(error)
     res.status(500).send("Error assign service to current session user.")
