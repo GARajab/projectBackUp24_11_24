@@ -124,7 +124,7 @@ const showUsersList = async (req, res) => {
 }
 const allUsersServices = async (req, res) => {
   try {
-    const userId = req.session.user._id
+    const userId = req.params.userID
 
     if (!userId) {
       return res.status(400).send("User ID is required.")

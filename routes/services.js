@@ -5,7 +5,7 @@ const isSignedIn = require("../middleware/is-sign-in")
 const isAdmin = require("../middleware/is-Admin")
 
 router.get("/usersList", isSignedIn, isAdmin, servicesController.showUsersList)
-router.get("/otherUsers", isSignedIn, servicesController.allUsersServices)
+router.get("/otherUsers/:userID", isSignedIn, servicesController.allUsersServices)
 router.get("/dashBoard", isSignedIn, servicesController.showServices)
 router.get("/", isSignedIn, servicesController.index)
 router.get("/new", isSignedIn, servicesController.newService)
