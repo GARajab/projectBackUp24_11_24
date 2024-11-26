@@ -29,11 +29,17 @@
             </div>
             <div class="form-group">
               <label for="orderStatus">Status</label>
-              <input type="text" name="orderStatus" class="form-control" id="orderStatus"
-                 value="<%= services.orderStatus %>">
+              <select name="orderStatus" id="orderStatus" class="form-select text-center">
+                <option selected value="<%= services.orderStatus %>"><%= services.orderStatus %></option>
+                <option value="In Process">In Process</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Completed">Completed</option>
+              </select>
+              <!-- <input type="text" name="orderStatus" class="form-control" id="orderStatus"
+                 value="<%= services.orderStatus %>"> -->
             </div>
             <div class="col-md-14 text-center">
-              <button type="submit" style="font-size: 25px;" class=" btn btn-block mybtn btn-primary tx-tfm">Update</button>
+              <button type="submit" style="font-size: 25px;" class=" btn btn-block mybtn btn-primary tx-tfm" onclick="return confirm('Are you sure you want to edit this item?');">Update</button>
             </div>
             <br>
         </div>

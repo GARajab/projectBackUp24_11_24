@@ -36,7 +36,7 @@ const signin_post = async (req, res) => {
   try {
     const userInDatabase = await User.findOne({ username: req.body.username })
     if (!userInDatabase) {
-      return res.send("Login Failed Pleas Try Again")
+      return res.redirect("/auth/sign-in")
     }
     const validPassword = bcrypt.compareSync(
       req.body.password,
@@ -54,13 +54,11 @@ const signin_post = async (req, res) => {
       address: userInDatabase.address,
       phoneNumber: userInDatabase.phoneNumber,
     }
-    function delayNotify() {
-      res.render("services/dashBoard", { user: req.session.user })
-    }
-    setTimeout(delayNotify, 5000)
+
+    res.render("services/dashBoard", { user: req.session.user })
   } catch (err) {
     console.log(err)
-    req.session.messages = "Please try again later"
+    res.redirect("/auth/sign-in")
   }
 }
 
