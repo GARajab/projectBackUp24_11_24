@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Funds</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">Add Funds</h1>
+      <div class="alert alert-info">
+        Your current balance:
+        <strong><%= user.balance %></strong>
+      </div>
+      <div class="alert alert-info">
+        Your balance will become:
+        <strong id="balanceBecome"></strong>
+      </div>
+
+      <form id="addFundsForm" method="POST" action="/addFund">
+        <div class="form-group">
+          <label for="amount">Amount to Add:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="amount"
+            name="amount"
+            min="1"
+            required
+          />
+        </div>
+
+        <h3>Payment Information</h3>
+        <div class="form-group">
+          <label for="cardNumber">Card Number:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cardNumber"
+            name="cardNumber"
+            required
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="expiryDate">Expiry Date (MM/YY):</label>
+            <input
+              type="text"
+              class="form-control"
+              id="expiryDate"
+              name="expiryDate"
+              placeholder="MM/YY"
+              required
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cvc">CVC:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cvc"
+              name="cvc"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Funds</button>
+      </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // Set initial balance from server-side (assuming you have the initial value available)
+      const currentBalance = <%= user.balance %>; // Ensure this value is defined in your server-side template
+
+      const balanceBecome = document.getElementById("balanceBecome");
+      const amountInput = document.getElementById("amount");
+
+      // Update the balance when user inputs the amount
+      amountInput.addEventListener("input", () => {
+        const amountToAdd = parseFloat(amountInput.value) || 0; // Default to 0 if input is invalid
+        const newBalance = currentBalance + amountToAdd; // Calculate new balance
+        balanceBecome.innerText = newBalance; // Update the balance display and format to 2 decimal places
+      });
+    </script>
+  </body>
+</html>

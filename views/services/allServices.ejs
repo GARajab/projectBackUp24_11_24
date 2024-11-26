@@ -52,6 +52,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
+          <th scope="col">IMEI</th>
           <th scope="col">Price</th>
           <% if (user.username == "Admin") { %>
           <th scope="col" class="col-md-2">Action</th>
@@ -64,6 +65,7 @@
         <tr>
           <th scope="row"><%= index+1 %></th>
           <td><%= service.nameOfService %></td>
+          <td><%= service.IMEI %></td>
           <td><%= service.price %> $</td>
           <% if (user.username == "Admin") { %>
           <div class="btn-group text-center">
@@ -92,6 +94,5 @@
         <% }) %>
       </tbody>
     </table>
-    
   </body>
 </html>

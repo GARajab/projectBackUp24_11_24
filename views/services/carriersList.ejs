@@ -27,6 +27,7 @@
           name="nameOfServiceID"
           class="form-select text-center"
           aria-label="Default select example"
+          required
         >
           <option selected>Select The Service</option>
           <% services.forEach((service) => { %>
@@ -42,7 +43,14 @@
           style="font-size: 30px; margin-top: 30px"
           >Price</label
         >
-        <input type="text" id="price" name="price" class="form-control" />
+        <input
+          type="text"
+          id="price"
+          name="price"
+          class="form-control text-center"
+          required
+          readonly
+        />
 
         <label
           for="IMEI"
@@ -57,9 +65,11 @@
               id="IMEI14"
               name="IMEI14"
               type="text"
-              class="form-control"
+              class="form-control text-center"
               placeholder="First 14 digit of the IMEI"
               oninput="calculateCheckDigit()"
+              maxlength="14"
+              required
             />
           </div>
           <div class="col-2">
@@ -67,11 +77,17 @@
               id="IMEIlast"
               name="IMEIlast"
               type="text"
-              class="form-control"
+              class="form-control text-center"
             />
           </div>
         </div>
-        <input type="text" id="IMEIfull" name="IMEIfull" class="form-control" />
+        <input
+          type="text"
+          id="IMEI"
+          name="IMEI"
+          class="form-control text-center"
+          hidden
+        />
         <button
           class="btn btn-success w-100"
           style="font-size: 30px; margin-top: 30px"
@@ -96,12 +112,10 @@
       function calculateCheckDigit() {
         // Get the current value of the first 14-digit input
         const IMEI14 = document.getElementById("IMEI14").value
+        const IMEI = document.getElementById("IMEI").value
+        const IMEIlast = document.getElementById("IMEIlast").value
 
         // Check if the input is valid
-        if (IMEI14.length !== 14 || isNaN(IMEI14)) {
-          alert("Input must be a 14-digit numeric string")
-          return
-        }
 
         let sum = 0
         let isOdd = true
@@ -129,6 +143,15 @@
         // Display the full IMEI and the checksum separately
         // document.getElementById("fullIMEI").value = imei14 + checksum
         document.getElementById("IMEIlast").value = checksum
+        document.getElementById("IMEI").value =
+          document.getElementById("IMEI14").value +
+          document.getElementById("IMEIlast").value
+
+        if (IMEI14.length == 14) {
+          document.getElementById("IMEIlast").style.backgroundColor = "#A1EEBD"
+        } else {
+          document.getElementById("IMEIlast").style.backgroundColor = "White"
+        }
       }
     </script>
   </body>

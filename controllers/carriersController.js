@@ -52,3 +52,39 @@ exports.showPurchasedServicesList = async (req, res) => {
     res.status(500).send("Error assign service to current session user.")
   }
 }
+
+exports.addFundGet = async (req, res) => {
+  if (!req.session.user) {
+    return res.redirect("/login") // Redirect to login if not logged in
+  }
+  res.render("../views/services/addFund.ejs", { user: req.session.user })
+}
+
+// Handle the adding of funds
+exports.addFundPost = async (req, res) => {
+  const { amount, cardNumber, expiryDate, cvc } = req.body
+
+  // Simulate payment processing
+  if (!req.session.user) {
+    return res.status(401).send("Unauthorized. Please log in.")
+  }
+
+  // Here you would normally process the payment via some payment gateway.
+  // For simulation purposes, we skip this and directly update the balance.
+
+  try {
+    const addedAmount = parseFloat(amount)
+    req.session.user.balance += addedAmount // Update session balance
+
+    // Update user balance in MongoDB
+    await User.findByIdAndUpdate(req.session.user._id, {
+      balance: req.session.user.balance,
+    })
+
+    // Redirect to dashboard after successful payment
+    res.redirect("/services/dashboard")
+  } catch (error) {
+    console.error(error)
+    res.status(500).send("Internal server error.")
+  }
+}

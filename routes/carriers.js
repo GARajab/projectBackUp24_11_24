@@ -6,4 +6,6 @@ const isSignedIn = require("../middleware/is-sign-in")
 
 router.get("/carriers", isSignedIn, carriersController.showCarriersList)
 router.post("/addService", carriersController.showPurchasedServicesList)
+router.get("/addFund", carriersController.addFundGet)
+router.post("/addFund", carriersController.addFundPost)
 module.exports = router
