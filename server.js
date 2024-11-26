@@ -3,16 +3,13 @@ dotenv.config()
 const express = require("express")
 const app = express()
 const session = require("express-session")
-// const authController = require("./controllers/auth.js");
 const mongoose = require("mongoose")
 const methodOverRide = require("method-override")
 const morgan = require("morgan")
 const addServiceRouter = require("./routes/carriers.js")
-const isSignedIn = require("./middleware/is-sign-in")
 const passUserToView = require("./middleware/pass-user-to-view")
 const authRouter = require("./routes/auth.js")
 const servicesRouter = require("./routes/services.js")
-// Import routes
 const carriersRoutes = require("./routes/carriers")
 
 const port = process.env.PORT ? process.env.PORT : 3000
@@ -34,16 +31,14 @@ app.use(
   })
 )
 
-app.set("view engine", "ejs") // Set EJS as the default view engine
+app.set("view engine", "ejs")
 
-// require("controller")
 app.use(passUserToView)
-// Use routes
+
 app.use(carriersRoutes)
 
-// require("routes")
 app.use("/auth", authRouter)
-// const servicesRouter = require("./routes/services.js");
+
 app.use("/services", servicesRouter)
 
 app.use("/addService", addServiceRouter)

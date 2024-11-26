@@ -39,13 +39,14 @@ exports.showPurchasedServicesList = async (req, res) => {
         price: req.body.price,
         IMEI: req.body.IMEI,
         userServSelected: req.session.user._id,
+        orderStatus: "pending",
       })
       req.session.user.balance -= req.body.price
       await User.findByIdAndUpdate(req.session.user._id, {
         balance: req.session.user.balance,
       })
       await Services.create(addnewService)
-      res.redirect(`/services/otherUsers?userId=${req.session.user._id}`)
+      res.redirect(`/services/otherUsers/${req.session.user._id}`)
     }
   } catch (error) {
     console.log(error)

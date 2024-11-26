@@ -7,21 +7,52 @@
         <a href="#" class="btn btn-success"
           >My Balance is: <%= user.balance %></a
         >
-        <a href="/auth/sign-out" class="btn btn-danger">Sign Out</a>
-        <a href="/services/dashBoard" class="btn btn-danger">Home</a>
-        <a href="/services" class="btn btn-danger">All Services</a>
+        <a
+          href="/auth/sign-out"
+          class="btn btn-danger"
+          onclick="clearLoginNotification()"
+          >Sign Out</a
+        >
+        <a
+          href="/services/dashBoard"
+          class="btn btn-danger"
+          onclick="clearLoginNotification()"
+          >Home</a
+        >
+        <a
+          href="/services"
+          class="btn btn-danger"
+          onclick="clearLoginNotification()"
+          >All Services</a
+        >
         <% } else if (user) { %>
-        <a class="btn btn-dark" style="margin-right: 20px" href="/addFund">
+        <a
+          class="btn btn-dark"
+          style="margin-right: 20px"
+          href="/addFund"
+          onclick="clearLoginNotification()"
+        >
           Add Fund
         </a>
         <a href="#" class="btn btn-success"
           >My Balance is: <%= user.balance %></a
         >
-        <a href="/auth/sign-out" class="btn btn-primary">Sign Out</a>
-        <a href="/services/dashBoard" class="btn btn-primary">Home</a>
         <a
-          href="/services/otherUsers?userId=<%= user._id %>"
+          href="/auth/sign-out"
           class="btn btn-primary"
+          onclick="clearLoginNotification()"
+          >Sign Out</a
+        >
+        <a
+          href="/services/dashBoard"
+          class="btn btn-primary"
+          onclick="clearLoginNotification()"
+          >Home</a
+        >
+        <a
+          href="/services/otherUsers/<%= user._id %>"
+          class="btn btn-primary"
+          onclick="clearLoginNotification()"
           >My Services</a
         >
         <% } else { %>
@@ -32,3 +63,8 @@
     </div>
   </div>
 </nav>
+<script>
+  function clearLoginNotification() {
+    sessionStorage.removeItem("loggedInNotificationShown")
+  }
+</script>

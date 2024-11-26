@@ -17,6 +17,7 @@ const serviceSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  orderStatus: { type: String, required: true },
 })
 
 const Services = mongoose.model("Services", serviceSchema)

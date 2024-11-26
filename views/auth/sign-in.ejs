@@ -1,20 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign In</title>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!------ Include the above in your HEAD tag ---------->
-
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+ <title>Sign In</title>
+<%- include('../partials/header.ejs') %>
 
 <body>
   <%- include('../partials/navbar.ejs') %>
@@ -47,7 +34,7 @@
                   </div>
                   <br>
                   <div class="col-md-14 text-center">
-                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" onclick="pushNotify()">Login</button>
                   </div>
                   <div class="col-md-12 ">
                     <div class="form-group">
@@ -65,6 +52,18 @@
     </div>
     <% } %>
       </div>
+         <script>
+        function pushNotify() {
+          
+  new Notify({
+    title: 'Phone Unlock',
+    text: 'Thanks You Will Be Redirected Now To Your Dashboard',
+    autotimeout: 4500,
+  })
+}
+      </script>
+     <!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
 </body>
 
 </html>

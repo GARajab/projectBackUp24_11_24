@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Funds</title>
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-  </head>
+  <title>Add Fund</title>
+  <%- include('../partials/header.ejs') %>
   <body>
+    <%- include('../partials/navbar.ejs') %>
     <div class="container mt-5">
       <h1 class="mb-4">Add Funds</h1>
       <div class="alert alert-info">
@@ -80,18 +73,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-      // Set initial balance from server-side (assuming you have the initial value available)
-      const currentBalance = <%= user.balance %>; // Ensure this value is defined in your server-side template
+              // Set initial balance from server-side (assuming you have the initial value available)
+              const currentBalance = <%= user.balance %>; // Ensure this value is defined in your server-side template
 
-      const balanceBecome = document.getElementById("balanceBecome");
-      const amountInput = document.getElementById("amount");
+              const balanceBecome = document.getElementById("balanceBecome");
+              const amountInput = document.getElementById("amount");
+              if(amountInput.innerText==""){
+                balanceBecome.innerText=currentBalance
+              }
 
-      // Update the balance when user inputs the amount
       amountInput.addEventListener("input", () => {
-        const amountToAdd = parseFloat(amountInput.value) || 0; // Default to 0 if input is invalid
-        const newBalance = currentBalance + amountToAdd; // Calculate new balance
-        balanceBecome.innerText = newBalance; // Update the balance display and format to 2 decimal places
-      });
+              const amountToAdd = parseFloat(amountInput.value) || 0;
+              const newBalance = currentBalance + amountToAdd;
+              balanceBecome.innerText = newBalance;})
     </script>
   </body>
 </html>

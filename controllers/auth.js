@@ -54,7 +54,10 @@ const signin_post = async (req, res) => {
       address: userInDatabase.address,
       phoneNumber: userInDatabase.phoneNumber,
     }
-    res.render("services/dashBoard", { user: req.session.user })
+    function delayNotify() {
+      res.render("services/dashBoard", { user: req.session.user })
+    }
+    setTimeout(delayNotify, 5000)
   } catch (err) {
     console.log(err)
     req.session.messages = "Please try again later"
