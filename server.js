@@ -11,6 +11,8 @@ const passUserToView = require("./middleware/pass-user-to-view")
 const authRouter = require("./routes/auth.js")
 const servicesRouter = require("./routes/services.js")
 const carriersRoutes = require("./routes/carriers")
+const getMessages = require("./middleware/display-message.js")
+const flash = require("express-flash")
 
 const port = process.env.PORT ? process.env.PORT : 3000
 
@@ -32,6 +34,8 @@ app.use(
 )
 
 app.set("view engine", "ejs")
+app.use(flash())
+app.use(getMessages)
 
 app.use(passUserToView)
 
@@ -42,16 +46,6 @@ app.use("/auth", authRouter)
 app.use("/services", servicesRouter)
 
 app.use("/addService", addServiceRouter)
-
-app.use((req, res, next) => {
-  if (req.session.messages) {
-    res.locals.messages = req.session.messages
-    req.session.messages = null
-  } else {
-    res.locals.messages = null
-  }
-  next()
-})
 
 app.get("/", async (req, res) => {
   res.render("auth/sign-in.ejs")

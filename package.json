@@ -16,11 +16,12 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "express-flash": "^0.0.2",
     "express-session": "^1.18.1",
     "express-toastr": "^2.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^8.8.0",
     "morgan": "^1.10.0",
-    "simple-notify": "^1.0.5"
+    "toastify-js": "^1.12.0"
   }
 }

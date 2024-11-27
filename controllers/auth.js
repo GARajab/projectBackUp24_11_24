@@ -1,9 +1,19 @@
 const express = require("express")
 const router = express.Router()
 const User = require("../models/user")
-const Services = require("../models/services")
 const bcrypt = require("bcrypt")
-const isSignedIn = require("../middleware/is-sign-in")
+const messages = require("../middleware/display-message")
+const flash = require("express-flash")
+const session = require("express-session")
+const Toastify = require("toastify-js")
+// const showMsg = (req, res) => {
+//   req.flash("info", "Flash Message Added")
+//   res.redirect("/show-flash-message")
+// }
+
+// const flashMsg = (req, res) => {
+//   res.render("index", { messages: req.flash("info") })
+// }
 
 const signup_get = (req, res) => {
   res.render("auth/sign-up")
@@ -21,6 +31,7 @@ const signup_post = async (req, res) => {
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword
     const user = await User.create(req.body)
+    req.session.messages = `Thank You ${req.body.username} Now You Can Sign In And Use Our Services`
     res.redirect("/auth/sign-in")
   } catch {
     // console.log(error);
@@ -54,8 +65,11 @@ const signin_post = async (req, res) => {
       address: userInDatabase.address,
       phoneNumber: userInDatabase.phoneNumber,
     }
-
-    res.render("services/dashBoard", { user: req.session.user })
+    res.locals.messages = `Welcome Back ${req.session.user.username} Enjoy Using Our Services!`
+    res.render("services/dashBoard", {
+      user: req.session.user,
+      messages: res.locals.messages,
+    })
   } catch (err) {
     console.log(err)
     res.redirect("/auth/sign-in")
