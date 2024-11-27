@@ -17,7 +17,6 @@
                 <% if (user && user.username == "Admin") { %>
                 <li class="breadcrumb-item mx-auto fs-1" aria-current="page">
                   Admin Dashboard
-                  <h1><%= messages %></h1>
                 </li>
                 <% } else { %>
                    <li class="breadcrumb-item mx-auto fs-1" aria-current="page">
@@ -86,7 +85,7 @@
                 <hr />
                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Created At</p>
+                    <p class="mb-0">Joined On</p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0"><%= user.createdAt %></p>
@@ -128,14 +127,16 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Toast Notification -->
  <script>
-
-  Toastify({
+Toastify({
   text: "<%= messages %>",
   className: "success",
   style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)",
+    background: "#157347",
+    color:"white"
   }
 }).showToast();
+
+
  </script>
   </body>
 </html>

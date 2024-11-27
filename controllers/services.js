@@ -100,8 +100,10 @@ const showServices = async (req, res) => {
     const populatedServices = await Services.find({}).populate(
       "userServSelected"
     )
+    
     res.render("services/dashBoard", {
       services: populatedServices,
+      messages: res.locals.messages,
     }) // Render a views file called show.ejs
   } catch (err) {
     console.log(err)
