@@ -8,7 +8,7 @@ const Services = require("../models/services")
 // controllers/carriersController.js
 exports.showCarriersList = async (req, res) => {
   try {
-    const servicesToSelect = await Services.find()
+    const servicesToSelect = await Services.find({ IMEI: null })
     res.render("../views/services/carriersList.ejs", {
       services: servicesToSelect,
     }) // Ensure your view engine is set up correctly

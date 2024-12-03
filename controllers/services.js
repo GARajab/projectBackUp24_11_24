@@ -4,7 +4,9 @@ const Services = require("../models/services")
 
 const index = async (req, res) => {
   try {
-    const populatedServices = await Services.find().populate("userServSelected")
+    const populatedServices = await Services.find({ IMEI: null }).populate(
+      "userServSelected"
+    )
     res.render("services/allServices.ejs", { services: populatedServices })
   } catch (err) {
     console.log(err)
@@ -100,7 +102,7 @@ const showServices = async (req, res) => {
     const populatedServices = await Services.find({}).populate(
       "userServSelected"
     )
-    
+
     res.render("services/dashBoard", {
       services: populatedServices,
       messages: res.locals.messages,
